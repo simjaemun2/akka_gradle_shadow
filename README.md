@@ -10,6 +10,6 @@ Exception in thread "main" com.typesafe.config.ConfigException$Missing: No confi
 </code></pre>
 
 
-If you want to detail akka documents for this exception, see below akka document.
+If you want to read detail akka documents for this exception, see below akka document.
 
 http://doc.akka.io/docs/akka/snapshot/general/configuration.html#When_using_JarJar__OneJar__Assembly_or_any_jar-bundler
