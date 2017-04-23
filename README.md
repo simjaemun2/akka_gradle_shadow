@@ -12,4 +12,4 @@ Exception in thread "main" com.typesafe.config.ConfigException$Missing: No confi
 
 If you want to detail akka documents for this exception, see below akka document.
 
-http://doc.akka.io/docs/akka/snapshot/general/configuration.html#When_using_JarJar__OneJar__Assembly_or_any_jar-bundler"# akka_gradle_shadow" 
+http://doc.akka.io/docs/akka/snapshot/general/configuration.html#When_using_JarJar__OneJar__Assembly_or_any_jar-bundler
