@@ -1,0 +1,59 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer
+
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.4"
+    }
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'scala'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.8'
+}
+
+ScalaCompileOptions.metaClass.daemonServer = true
+ScalaCompileOptions.metaClass.fork = true
+ScalaCompileOptions.metaClass.useAnt = false
+ScalaCompileOptions.metaClass.useCompileDaemon = false
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
+
+dependencies {
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.11', version: '2.4.17'
+    compile group: 'com.typesafe.akka', name: 'akka-remote_2.11', version: '2.4.17'
+    compile group: 'org.scala-lang', name: 'scala-library', version: '2.11.8'
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'AkkaMain'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+shadowJar {
+    baseName = 'akka-gradle-test'
+    transform(AppendingTransformer) {
+        resource = 'reference.conf'
+    }
+}
